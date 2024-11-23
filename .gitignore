@@ -2,6 +2,20 @@
 Code Test/Backend/.vs/Backend/FileContentIndex/0c657c87-7c87-4cdb-b05a-510b3199fbda.vsidx
 *.vsidx
 *.suo
-*.json
 *.cache
 *.editorconfig
+*.v2
+*.bin
+Code Test/Backend/Backend/appsettings.Development.json
+Code Test/Backend/Backend/obj/project.assets.json
+Code Test/FrontEnd/FrontEnd/obj/FrontEnd.csproj.nuget.dgspec.json
+Code Test/Backend/Backend/bin/Debug/net6.0/Backend.deps.json
+Code Test/Backend/Backend/bin/Debug/net6.0/Backend.runtimeconfig.json
+Code Test/Backend/Backend/bin/Debug/net6.0/appsettings.Development.json
+*.exe
+*.pdb
+*.dll
+Code Test/FrontEnd/FrontEnd/obj/Debug/net6.0/staticwebassets.build.json
+Code Test/Backend/Backend/obj/Debug/net6.0/staticwebassets.build.json
+*.txt
+*.json
