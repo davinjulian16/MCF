@@ -1,0 +1,74 @@
+﻿@model FrontEnd.Models.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Page";
+}
+
+<div class="container mt-5">
+    <form method="post" action="/Bpkb/Delete">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="AgreementNumber">Agreement Number</label>
+                    <input type="text" id="AgreementNumber" name="AgreementNumber" class="form-control" value="@Model.AgreementNumber" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="BranchId">Branch Id</label>
+                    <input type="text" id="BranchId" name="BranchId" class="form-control" value="@Model.BranchId" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="BpkbNo">No. BPKB</label>
+                    <input type="text" id="BpkbNo" name="BpkbNo" class="form-control" value="@Model.BpkbNo" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="BpkbDateIn">Tanggal BPKB In</label>
+                    <input type="date" id="BpkbDateIn" name="BpkbDateIn" class="form-control" value="@Model.BpkbDateIn?.ToString("yyyy-MM-dd")" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="BpkbDate">Tanggal BPKB</label>
+                    <input type="date" id="BpkbDate" name="BpkbDate" class="form-control" value="@Model.BpkbDate?.ToString("yyyy-MM-dd")" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="FakturNo">No. Faktur</label>
+                    <input type="text" id="FakturNo" name="FakturNo" class="form-control" value="@Model.FakturNo" readonly />
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="FakturDate">Tanggal Faktur</label>
+                    <input type="date" id="FakturDate" name="FakturDate" class="form-control" value="@Model.FakturDate?.ToString("yyyy-MM-dd")" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="PoliceNo">Nomor Polisi</label>
+                    <input type="text" id="PoliceNo" name="PoliceNo" class="form-control" value="@Model.PoliceNo" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="LocationId">Lokasi Penyimpanan</label>
+                    <select id="LocationId" name="LocationId" class="form-control" readonly>
+                        @foreach (var location in Model.locations)
+                        {
+                            <option value="@location.LocationId"
+                                    selected="@((location.LocationId == Model.LocationId) ? "selected" : null)">
+                                @location.LocationName
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group text-center mt-4">
+            <a href="/Bpkb/ViewPage" class="btn btn-secondary ml-3">Cancel</a>
+            <button type="submit" class="btn btn-primary">Delete</button>
+        </div>
+    </form>
+</div>

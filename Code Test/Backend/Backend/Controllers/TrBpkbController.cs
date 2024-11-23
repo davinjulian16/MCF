@@ -1,5 +1,6 @@
 ﻿using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
 
 namespace Backend.Controllers
 {
@@ -15,46 +16,68 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetTrBpkb()
+        [Route("GetListBpkb")]
+        public async Task<ActionResult> GetListBpkb()
         {
-            return Ok(await _context.TrBpkbs.FirstOrDefaultAsync());
+            return Ok(await _context.TrBpkbs.ToListAsync());
+        }
+
+        [HttpGet]
+        [Route("GetBpkbByAgreementNumber")]
+        public async Task<ActionResult> GetBpkbByAgreementNumber(string agreementNumber)
+        {
+            return Ok(await _context.TrBpkbs.Where(x=>x.AgreementNumber == agreementNumber).FirstOrDefaultAsync());
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddTrBpkb(TrBpkb trBpkb)
+        [Route("AddBpkb")]
+        public async Task<ActionResult> AddBpkb(TrBpkb trBpkb)
         {
+            trBpkb.CreatedOn=DateTime.Now;
+            trBpkb.CreatedBy = "sysadmin";
+
             _context.TrBpkbs.Add(trBpkb);
             await _context.SaveChangesAsync();
 
             return Ok(await _context.TrBpkbs.FirstOrDefaultAsync());
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateTrBpkb(TrBpkb trBpkb)
+        [HttpPost]
+        [Route("UpdateBpkb")]
+        public async Task<ActionResult> UpdateBpkb(TrBpkb trBpkb)
         {
             var dbTrBpkb = await _context.TrBpkbs.FindAsync(trBpkb.AgreementNumber);
             if (dbTrBpkb == null)
-                _context.TrBpkbs.Add(trBpkb);
-            else
-            {
-                dbTrBpkb.AgreementNumber = trBpkb.AgreementNumber;
-                dbTrBpkb.BpkbNo = trBpkb.BpkbNo;
-                dbTrBpkb.BranchId = trBpkb.BranchId;
-                dbTrBpkb.BpkbDate = trBpkb.BpkbDate;
-                dbTrBpkb.FakturNo = trBpkb.FakturNo;
-                dbTrBpkb.FakturDate = trBpkb.FakturDate;
-                dbTrBpkb.LocationId = trBpkb.LocationId;
-                dbTrBpkb.PoliceNo = trBpkb.PoliceNo;
-                dbTrBpkb.BpkbDateIn = trBpkb.BpkbDateIn;
-                dbTrBpkb.CreatedBy = trBpkb.CreatedBy;
-                dbTrBpkb.CreatedOn = trBpkb.CreatedOn;
-                dbTrBpkb.LastUpdatedBy = trBpkb.LastUpdatedBy;
-                dbTrBpkb.LastUpdatedOn = trBpkb.LastUpdatedOn;
-            }
+                return NotFound(new { Message = "Bpkb record not found." });
+
+            dbTrBpkb.AgreementNumber = trBpkb.AgreementNumber;
+            dbTrBpkb.BpkbNo = trBpkb.BpkbNo;
+            dbTrBpkb.BranchId = trBpkb.BranchId;
+            dbTrBpkb.BpkbDate = trBpkb.BpkbDate;
+            dbTrBpkb.FakturNo = trBpkb.FakturNo;
+            dbTrBpkb.FakturDate = trBpkb.FakturDate;
+            dbTrBpkb.LocationId = trBpkb.LocationId;
+            dbTrBpkb.PoliceNo = trBpkb.PoliceNo;
+            dbTrBpkb.BpkbDateIn = trBpkb.BpkbDateIn;
+            dbTrBpkb.LastUpdatedOn = DateTime.Now;
+            dbTrBpkb.LastUpdatedBy = "sysadmin";
 
             await _context.SaveChangesAsync();
-
             return Ok(await _context.TrBpkbs.FirstOrDefaultAsync());
+        }
+
+        [HttpDelete]
+        [Route("DeleteBpkb")]
+        public async Task<ActionResult> DeleteBpkb(string agreementNumber)
+        {
+            var trBpkb = await _context.TrBpkbs.FindAsync(agreementNumber);
+            if (trBpkb == null)
+                return NotFound(new { Message = "Bpkb record not found." });
+
+            _context.TrBpkbs.Remove(trBpkb);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Bpkb record deleted successfully." });
         }
     }
 }
