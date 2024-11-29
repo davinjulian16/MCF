@@ -22,8 +22,11 @@ namespace FrontEnd.Controllers
         {
             return View();
         }
-        public IActionResult LoginPage()
+        public async Task<IActionResult> LoginPage()
         {
+            string apiUrl = $"{_apiURL}User/logout";
+            var client = _clientFactory.CreateClient();
+            await client.GetAsync(apiUrl);
             return View();
         }
 

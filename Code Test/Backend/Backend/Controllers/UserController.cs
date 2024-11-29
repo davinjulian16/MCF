@@ -16,7 +16,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult> login(MsUser msUser)
+        public ActionResult login(MsUser msUser)
         {
             if (_context.MsUsers.Where(x => x.UserName == msUser.UserName && x.Password == msUser.Password).Count() > 0)
             {
@@ -32,14 +32,11 @@ namespace Backend.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("logout")]
-        public async Task<ActionResult> logout(MsUser msUser)
+        public ActionResult logout()
         {
-            if (!string.IsNullOrEmpty(msUser.UserName))
-            {
-                HttpContext.Session.SetString("UserLogin", string.Empty);
-            }
+            HttpContext.Session.SetString("UserLogin", string.Empty);
             return Ok();
         }
     }
