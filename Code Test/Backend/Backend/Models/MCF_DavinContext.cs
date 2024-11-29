@@ -22,11 +22,12 @@ namespace Backend.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            string connectionString = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT_DEV");
+            if (string.IsNullOrWhiteSpace(connectionString))
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=NDS-LPT-0319\\SQL2019;Database=MCF_Davin;password=nawadata;user=sa");
+                throw new InvalidOperationException("Connection string is not set in the environment variables.");
             }
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

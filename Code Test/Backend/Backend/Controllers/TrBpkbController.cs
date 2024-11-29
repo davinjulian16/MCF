@@ -36,6 +36,8 @@ namespace Backend.Controllers
 
             trBpkb.CreatedOn = DateTime.Now;
             trBpkb.CreatedBy = HttpContext.Session.GetString("UserLogin");
+            trBpkb.LastUpdatedOn = DateTime.Now;
+            trBpkb.LastUpdatedBy = HttpContext.Session.GetString("UserLogin");
 
             _context.TrBpkbs.Add(trBpkb);
             await _context.SaveChangesAsync();

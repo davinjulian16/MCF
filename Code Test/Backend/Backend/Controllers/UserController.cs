@@ -31,13 +31,5 @@ namespace Backend.Controllers
                 return BadRequest(new { Message = "User not found or invalid password" });
             }
         }
-
-        [HttpGet]
-        [Route("logout")]
-        public ActionResult logout()
-        {
-            HttpContext.Session.SetString("UserLogin", string.Empty);
-            return Ok();
-        }
     }
 }

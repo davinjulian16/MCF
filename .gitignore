@@ -18,6 +18,12 @@ Code Test/Backend/Backend/bin/Debug/net6.0/appsettings.Development.json
 Code Test/FrontEnd/FrontEnd/obj/Debug/net6.0/staticwebassets.build.json
 Code Test/Backend/Backend/obj/Debug/net6.0/staticwebassets.build.json
 *.txt
-*.json
 *.wsuo
 *.sqlite
+.vs/VSWorkspaceState.json
+Code Test/Backend/Backend/obj/Debug/net6.0/Backend.AssemblyInfo.cs
+Code Test/Backend/Backend/obj/Debug/net6.0/Backend.Properties.Resources.resources
+*.resx
+Code Test/Backend/Backend/obj/Debug/net6.0/Backend.sourcelink.json
+Code Test/FrontEnd/FrontEnd/bin/Debug/net6.0/FrontEnd.runtimeconfig.json
+Code Test/FrontEnd/FrontEnd/bin/Debug/net6.0/FrontEnd.staticwebassets.runtime.json
