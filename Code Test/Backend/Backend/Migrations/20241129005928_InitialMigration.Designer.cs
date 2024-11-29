@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(MCF_DavinContext))]
-    [Migration("20241122162343_CreateInitial")]
-    partial class CreateInitial
+    [Migration("20241129005928_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -135,6 +135,13 @@ namespace Backend.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)")
                         .HasColumnName("location_id");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("notes");
 
                     b.Property<string>("PoliceNo")
                         .HasMaxLength(20)

@@ -20,12 +20,27 @@ namespace Backend.Controllers
         {
             if (_context.MsUsers.Where(x => x.UserName == msUser.UserName && x.Password == msUser.Password).Count() > 0)
             {
+                if (!string.IsNullOrEmpty(msUser.UserName))
+                {
+                    HttpContext.Session.SetString("UserLogin", msUser.UserName);
+                }
                 return Ok();
             }
             else
             {
                 return BadRequest(new { Message = "User not found or invalid password" });
             }
+        }
+
+        [HttpPost]
+        [Route("logout")]
+        public async Task<ActionResult> logout(MsUser msUser)
+        {
+            if (!string.IsNullOrEmpty(msUser.UserName))
+            {
+                HttpContext.Session.SetString("UserLogin", string.Empty);
+            }
+            return Ok();
         }
     }
 }

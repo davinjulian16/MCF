@@ -19,3 +19,5 @@ Code Test/FrontEnd/FrontEnd/obj/Debug/net6.0/staticwebassets.build.json
 Code Test/Backend/Backend/obj/Debug/net6.0/staticwebassets.build.json
 *.txt
 *.json
+*.wsuo
+*.sqlite

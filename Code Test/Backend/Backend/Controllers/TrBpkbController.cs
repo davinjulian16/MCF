@@ -33,8 +33,9 @@ namespace Backend.Controllers
         [Route("AddBpkb")]
         public async Task<ActionResult> AddBpkb(TrBpkb trBpkb)
         {
-            trBpkb.CreatedOn=DateTime.Now;
-            trBpkb.CreatedBy = "sysadmin";
+
+            trBpkb.CreatedOn = DateTime.Now;
+            trBpkb.CreatedBy = HttpContext.Session.GetString("UserLogin");
 
             _context.TrBpkbs.Add(trBpkb);
             await _context.SaveChangesAsync();
@@ -60,7 +61,7 @@ namespace Backend.Controllers
             dbTrBpkb.PoliceNo = trBpkb.PoliceNo;
             dbTrBpkb.BpkbDateIn = trBpkb.BpkbDateIn;
             dbTrBpkb.LastUpdatedOn = DateTime.Now;
-            dbTrBpkb.LastUpdatedBy = "sysadmin";
+            dbTrBpkb.LastUpdatedBy = HttpContext.Session.GetString("UserLogin");
 
             await _context.SaveChangesAsync();
             return Ok(await _context.TrBpkbs.FirstOrDefaultAsync());
