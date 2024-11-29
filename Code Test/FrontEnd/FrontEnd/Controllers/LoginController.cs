@@ -41,7 +41,7 @@ namespace FrontEnd.Controllers
             }
             else
             {
-                userModel.ErrorMessage = "User not found or invalid password..";
+                TempData["AlertMessage"] = "User not found or invalid password..";
                 return RedirectToAction("LoginPage", "Login");
             }
 

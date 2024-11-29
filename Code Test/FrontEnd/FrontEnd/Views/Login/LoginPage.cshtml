@@ -64,6 +64,15 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Login</button>
+            @{
+                if (TempData["AlertMessage"] != null)
+                {
+                    string alertMessage = TempData["AlertMessage"].ToString();
+                    <script type="text/javascript">
+                        alert('@alertMessage');
+                    </script>
+                }
+            }
         </form>
     </div>
 
